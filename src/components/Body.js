@@ -19,7 +19,7 @@ const Body = () => {
 
   return (
     <div className='bg-[#1D1D1D] text-white'>
-      <div className='mx-3'>
+      <div className=''>
 
           {/* <div className={search ? 'flex items-center justify-center pt-10 laptop:hidden desktop:hidden' :"hidden"}>
               <input type="text" placeholder='  Search...' className='p-[6px] bg-[#333333] outline-none border-[#444444] w-[100%] caret-lime-600'/>
