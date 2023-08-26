@@ -1,3 +1,10 @@
+import iBommaIcon from "../../images/iBommaIcon.png"
+import PosterNotAvailable from "../../images/PosterNotAvailable.jpg"
+import ActorProfile from "../../images/ActorProfile.jpeg";
+import NotFoundImage from "../../images/NotFound.gif";
+import TmdbLogo from "../../images/TMDBLogo.png";
+import iBommaMovieContent from "../../images/iBommaMovieContent.jpg";
+
 export const API_KEY = `aa4f461fe6a0b439ca344503367b743f`;
 
 // -------------------- TOP RATED & UPCOMING --------------------
@@ -66,7 +73,6 @@ export const SEARCH_MOVIES_TVSHOWS_PEOPLE = `https://api.themoviedb.org/3/search
 
 export const POSTER_NOT_AVAILABLE = `https://raw.githubusercontent.com/Siva-Tejaa/Projects-Data/main/Poster%20Not%20Available.jpg`;
 
-export const BACKDROP_NOT_AVAILABLE = `https://siparekraf.kamparkab.go.id/assets/images/no-image.png`;
-
 export const PROFILE_NOT_AVAILABLE = `https://raw.githubusercontent.com/Siva-Tejaa/Projects-Data/main/Profile.jpeg`;
 
+export { iBommaIcon, PosterNotAvailable, TmdbLogo, ActorProfile, NotFoundImage, iBommaMovieContent };

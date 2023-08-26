@@ -1,8 +1,9 @@
 import React,{useState, useEffect} from 'react';
 import { MdMonitor } from "react-icons/md";
-import { LONG_IMAGE_URL, POSTER_NOT_AVAILABLE, TRENDING_TV_SHOWS } from './utils/Api';
+import { LONG_IMAGE_URL, TRENDING_TV_SHOWS } from './utils/Api';
 import BodySkeleton from './LoadingSkeleton/BodySkeleton';
 import { Link } from 'react-router-dom';
+import { PosterNotAvailable } from './utils/Api';
 
 const WebSeries = () => {
 
@@ -63,9 +64,9 @@ const WebSeries = () => {
           {
           trendingTvShows.slice(0,12).map((tvshow) => (
           <div className='p-1 mb-6 w-[31.3%] laptop:w-[15%] laptop:p-2 laptop:mb-2 desktop:w-[15%] desktop:p-3' key={tvshow?.id} title={tvshow?.name}>
-            <Link to={`/tvshowdetails/${tvshow?.id}`}><img src={tvshow?.poster_path ? LONG_IMAGE_URL + tvshow?.poster_path : POSTER_NOT_AVAILABLE} width="230" height="345" alt={tvshow?.original_name} loading="lazy" className='bg-[#252525] rounded'/>
-            <p className='font-medium text-sm block whitespace-nowrap text-ellipsis overflow-hidden laptop:text-base'>{tvshow?.name}</p>
-            <p className='text-xs font-medium bg-[#3d3d3d] inline p-1 rounded text-[#6AC045] laptop:text-sm'>{tvshow?.first_air_date.slice(0,4)}</p></Link>
+            <Link to={`/tvshowdetails/${tvshow?.id}`}><img src={tvshow?.poster_path ? LONG_IMAGE_URL + tvshow?.poster_path : PosterNotAvailable} width="230" height="345" alt={tvshow?.original_name} loading="lazy" className='bg-[#252525] rounded'/>
+            <p className='font-medium text-sm block whitespace-nowrap text-ellipsis overflow-hidden laptop:text-base'>{tvshow?.name || "Not Available"}</p>
+            <p className='text-xs font-medium bg-[#3d3d3d] inline p-1 rounded text-[#6AC045] laptop:text-sm'>{tvshow?.first_air_date.slice(0,4) || "NA"}</p></Link>
           </div>
         ))
       }

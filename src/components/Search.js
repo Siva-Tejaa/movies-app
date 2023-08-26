@@ -33,7 +33,7 @@ const Search = () => {
 
 
   return (
-    <div className='bg-[#1D1D1D] text-white'>
+    <div className='bg-[#1D1D1D] text-white h-[100vh]'>
       <div className='mx-3 py-6 laptop:mx-14 laptop:py-6 desktop:mx-16'>
         <div>
           <p className='bg-[var(--main-color)] p-2'>Search Results({searchResults.length>0 ? searchResults.length : "0"})</p>
@@ -58,7 +58,7 @@ const Search = () => {
                     <p className='description text-xs text-white font-normal text-justify desktop:text-sm'>{result?.overview}</p>
                   </div>
                 </div></Link>
-              )) : <p className='text-center h-[100dvh]'>There are no search results that matched your query</p>
+              )) : <p className='text-center'>There are no search results that matched your query</p>
             }
           </div>
         </div>

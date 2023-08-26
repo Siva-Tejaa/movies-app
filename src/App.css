@@ -9,3 +9,6 @@
   /* font-family: Raleway,Helvetica,Arial,sans-serif; */
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
+.image_placeholder{
+  background-image: url('./images//iBommaMovieContent.jpg');
+}

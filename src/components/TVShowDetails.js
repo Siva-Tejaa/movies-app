@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import Context from './utils/Context';
-import { API_KEY, LONG_IMAGE_URL, POSTER_NOT_AVAILABLE, TV_DETAILS, TV_IMAGES, TV_VIDEOS, TV_CREDITS, SIMILAR_TV_SHOWS, PROFILE_NOT_AVAILABLE } from './utils/Api';
+import { API_KEY, LONG_IMAGE_URL, TV_DETAILS, TV_IMAGES, TV_VIDEOS, TV_CREDITS, SIMILAR_TV_SHOWS } from './utils/Api';
 import { Rating } from '@smastrom/react-rating';
 import "./MovieDetails.css";
 import { BiLinkExternal } from "react-icons/bi";
@@ -9,6 +9,7 @@ import { IoMdGlobe } from "react-icons/io";
 import { SiSimilarweb } from "react-icons/si";
 import BodySkeleton from './LoadingSkeleton/BodySkeleton';
 import { Link } from 'react-router-dom';
+import { PosterNotAvailable, TmdbLogo, ActorProfile } from './utils/Api';
 
 const TvShowDetails = () => {
 
@@ -83,8 +84,8 @@ const TvShowDetails = () => {
   return (
     <div className={nav || search ? 'bg-[#1D1D1D] text-white pt-10 laptop:pt-0' : 'bg-[#1D1D1D] text-white' }>
       <div className='flex flex-nowrap justify-start gap-4 bg-cover bg-no-repeat bg-[#2b2b2b] bg-blend-overlay laptop:gap-8' style={{backgroundImage: `url(${LONG_IMAGE_URL}${tvshowdetails?.backdrop_path})`}}>
-          <div className='ml-5 py-10 laptop:ml-14 laptop:py-14 desktop:ml-16 desktop:py-16'>
-            <img src={tvshowdetails?.poster_path ? LONG_IMAGE_URL + tvshowdetails?.poster_path : POSTER_NOT_AVAILABLE} alt={tvshowdetails?.original_name} loading="lazy" className='bg-[#252525] rounded-md shadow-lg w-[165px] h-[240px] laptop:w-[235px] laptop:h-[360px]' /> 
+          <div className='ml-3 py-10 laptop:ml-14 laptop:py-14 desktop:ml-16 desktop:py-16'>
+            <img src={tvshowdetails?.poster_path ? LONG_IMAGE_URL + tvshowdetails?.poster_path : PosterNotAvailable} alt={tvshowdetails?.original_name} loading="lazy" className='bg-[#252525] rounded-md shadow-lg w-[165px] h-[240px] laptop:w-[235px] laptop:h-[360px]' /> 
           </div>
           <div className='py-11 overflow-hidden whitespace-nowrap text-ellipsis laptop:py-14 desktop:py-16'>
           <h1 className='text-xl font-[700] text-[#fafafa] mb-[2px] laptop:text-2xl desktop:text-3xl'>{tvshowdetails?.name}</h1>
@@ -99,7 +100,7 @@ const TvShowDetails = () => {
               readOnly
             />
             <p className='text-[#808080]'>({tvshowdetails?.vote_count})</p> &nbsp; &nbsp;
-            <img src="https://raw.githubusercontent.com/Siva-Tejaa/Projects-Data/main/TMDB%20Logo.png" alt="TMDB" title="TMDB" className='w-8 h-4 mr-2 rounded-sm bg-[#2b2b2b] laptop:w-8 laptop:h-4'/>
+            <img src={TmdbLogo} alt="TMDB" title="TMDB" className='w-8 h-4 mr-2 rounded-sm bg-[#2b2b2b] laptop:w-8 laptop:h-4'/>
             <p>{String(tvshowdetails?.vote_average).slice(0,3)}/10</p>
           </div>
           <div className='flex items-center text-xs my-2 laptop:text-base'>
@@ -183,7 +184,7 @@ const TvShowDetails = () => {
           tvshowcredits?.cast?.length !==0 ?
            tvshowcredits?.cast?.slice(0,12).map((cast) => (
             <div title={cast?.name}>
-              <img src={cast.profile_path ? LONG_IMAGE_URL + cast.profile_path : PROFILE_NOT_AVAILABLE} className='w-56 h-32 bg-[#2b2b2b] rounded-md laptop:w-28 laptop:h-36' loading="lazy" alt={cast?.name}/>
+              <img src={cast.profile_path ? LONG_IMAGE_URL + cast.profile_path : ActorProfile} className='w-56 h-32 bg-[#2b2b2b] rounded-md laptop:w-28 laptop:h-36' loading="lazy" alt={cast?.name}/>
               <p className='text-sm text-center w-24 overflow-hidden text-ellipsis whitespace-nowrap laptop:w-28'>{cast?.name}</p>
               <p className='text-xs text-center text-[#808080] w-24 overflow-hidden text-ellipsis whitespace-nowrap laptop:w-28'>{cast?.character}</p>
             </div>
@@ -229,9 +230,9 @@ const TvShowDetails = () => {
             similartvshows.length>0 ?
             similartvshows.slice(0,6).map((tvshow) => (
               <div className='p-1 mb-6 w-[31.3%] laptop:w-[15%] laptop:p-2 laptop:mb-2 desktop:w-[15%] desktop:p-3' key={tvshow?.id} title={tvshow?.title}>
-                <Link to={`/tvshowdetails/${tvshow?.id}`}><img src={tvshow?.poster_path ? LONG_IMAGE_URL + tvshow?.poster_path : POSTER_NOT_AVAILABLE} width="230" height="345" alt={tvshow?.original_title} loading="lazy" className='bg-[#252525] rounded'/>
-                <p className='font-medium text-sm block whitespace-nowrap text-ellipsis overflow-hidden laptop:text-base'>{tvshow?.name}</p>
-                <p className='text-xs font-medium bg-[#3d3d3d] inline p-1 rounded text-[#6AC045] laptop:text-sm'>{tvshow?.first_air_date.slice(0,4)}</p></Link>
+                <Link to={`/tvshowdetails/${tvshow?.id}`}><img src={tvshow?.poster_path ? LONG_IMAGE_URL + tvshow?.poster_path : PosterNotAvailable} width="230" height="345" alt={tvshow?.original_title} loading="lazy" className='bg-[#252525] rounded'/>
+                <p className='font-medium text-sm block whitespace-nowrap text-ellipsis overflow-hidden laptop:text-base'>{tvshow?.name || "Not Available"}</p>
+                <p className='text-xs font-medium bg-[#3d3d3d] inline p-1 rounded text-[#6AC045] laptop:text-sm'>{tvshow?.first_air_date?.slice(0,4) || "NA"}</p></Link>
               </div>
             )) : <p className='my-14'>Similar TV Shows Not Available</p> 
           }</>

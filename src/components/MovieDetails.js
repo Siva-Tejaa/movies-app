@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import Context from './utils/Context';
-import { MOVIE_DETAILS, API_KEY, MOVIE_IMAGES, MOVIE_VIDEOS, MOVIE_CREDITS, SIMILAR_MOVIES, LONG_IMAGE_URL, POSTER_NOT_AVAILABLE, PROFILE_NOT_AVAILABLE } from './utils/Api';
+import { MOVIE_DETAILS, API_KEY, MOVIE_IMAGES, MOVIE_VIDEOS, MOVIE_CREDITS, SIMILAR_MOVIES, LONG_IMAGE_URL } from './utils/Api';
 import { Rating } from '@smastrom/react-rating';
 import "./MovieDetails.css";
 import { BiLinkExternal } from "react-icons/bi";
@@ -9,6 +9,7 @@ import { IoMdGlobe } from "react-icons/io";
 import { SiSimilarweb } from "react-icons/si";
 import BodySkeleton from './LoadingSkeleton/BodySkeleton';
 import { Link } from 'react-router-dom';
+import { PosterNotAvailable, TmdbLogo, ActorProfile } from './utils/Api';
 
 const MovieDetails = () => {
 
@@ -83,8 +84,8 @@ const MovieDetails = () => {
   return (
     <div className={nav || search ? 'bg-[#1D1D1D] text-white pt-10 laptop:pt-0' : 'bg-[#1D1D1D] text-white' }>
       <div className='flex flex-nowrap justify-start gap-4 bg-cover bg-no-repeat bg-[#2b2b2b] bg-blend-overlay laptop:gap-8' style={{backgroundImage: `url(${LONG_IMAGE_URL}${moviedetails?.backdrop_path})`}}>
-          <div className='ml-5 py-10 laptop:ml-14 laptop:py-14 desktop:ml-16 desktop:py-16'>
-            <img src={moviedetails?.poster_path ? LONG_IMAGE_URL + moviedetails?.poster_path : POSTER_NOT_AVAILABLE} alt={moviedetails?.original_title} loading="lazy" className='bg-[#252525] rounded-md shadow-lg w-[165px] h-[240px] laptop:w-[235px] laptop:h-[360px]' /> 
+          <div className='ml-3 py-10 laptop:ml-14 laptop:py-14 desktop:ml-16 desktop:py-16'>
+            <img src={moviedetails?.poster_path ? LONG_IMAGE_URL + moviedetails?.poster_path : PosterNotAvailable} alt={moviedetails?.original_title} loading="lazy" className='bg-[#252525] rounded-md shadow-lg w-[165px] h-[240px] laptop:w-[235px] laptop:h-[360px]' /> 
           </div>
           <div className='py-11 overflow-hidden whitespace-nowrap text-ellipsis laptop:py-14 desktop:py-16'>
           <h1 className='text-xl font-[700] text-[#fafafa] mb-[2px] laptop:text-2xl desktop:text-3xl'>{moviedetails?.title}</h1>
@@ -99,7 +100,7 @@ const MovieDetails = () => {
               readOnly
             />
             <p className='text-[#808080]'>({moviedetails?.vote_count})</p> &nbsp; &nbsp;
-            <img src="https://raw.githubusercontent.com/Siva-Tejaa/Projects-Data/main/TMDB%20Logo.png" alt="TMDB" title="TMDB" className='w-8 h-4 mr-2 rounded-sm bg-[#2b2b2b] laptop:w-8 laptop:h-4'/>
+            <img src={TmdbLogo} alt="TMDB" title="TMDB" className='w-8 h-4 mr-2 rounded-sm bg-[#2b2b2b] laptop:w-8 laptop:h-4'/>
             <p>{String(moviedetails?.vote_average).slice(0,3)}/10</p>
           </div>
           <div className='flex items-center text-xs my-2 laptop:text-base'>
@@ -183,7 +184,7 @@ const MovieDetails = () => {
           moviecredits.length !==0 ? 
            moviecredits?.cast?.slice(0,16).map((cast) => (
             <div title={cast?.name}>
-              <img src={cast.profile_path ? LONG_IMAGE_URL + cast.profile_path : PROFILE_NOT_AVAILABLE} className='w-56 h-32 bg-[#2b2b2b] rounded-md laptop:w-28 laptop:h-36' loading="lazy" alt={cast?.name}/>
+              <img src={cast.profile_path ? LONG_IMAGE_URL + cast.profile_path : ActorProfile} className='w-56 h-32 bg-[#2b2b2b] rounded-md laptop:w-28 laptop:h-36' loading="lazy" alt={cast?.name}/>
               <p className='text-sm text-center w-24 overflow-hidden text-ellipsis whitespace-nowrap laptop:w-28'>{cast?.name}</p>
               <p className='text-xs text-center text-[#808080] w-24 overflow-hidden text-ellipsis whitespace-nowrap laptop:w-28'>{cast?.character}</p>
             </div>
@@ -229,9 +230,9 @@ const MovieDetails = () => {
             similarmovies.length > 0 ?
             similarmovies.slice(0,6).map((movie) => (
               <div className='p-1 mb-6 w-[31.3%] laptop:w-[15%] laptop:p-2 laptop:mb-2 desktop:w-[15%] desktop:p-3' key={movie?.id} title={movie?.title}>
-                <Link to={`/moviedetails/${movie?.id}`}><img src={movie?.poster_path ? LONG_IMAGE_URL + movie?.poster_path : POSTER_NOT_AVAILABLE} width="230" height="345" alt={movie?.original_title} loading="lazy" className='bg-[#252525] rounded'/>
-                <p className='font-medium text-sm block whitespace-nowrap text-ellipsis overflow-hidden laptop:text-base'>{movie?.title}</p>
-                <p className='text-xs font-medium bg-[#3d3d3d] inline p-1 rounded text-[#6AC045] laptop:text-sm'>{movie?.release_date.slice(0,4)}</p></Link>
+                <Link to={`/moviedetails/${movie?.id}`}><img src={movie?.poster_path ? LONG_IMAGE_URL + movie?.poster_path : PosterNotAvailable} width="230" height="345" alt={movie?.original_title} loading="lazy" className='bg-[#252525] rounded'/>
+                <p className='font-medium text-sm block whitespace-nowrap text-ellipsis overflow-hidden laptop:text-base'>{movie?.title || "Not Available"}</p>
+                <p className='text-xs font-medium bg-[#3d3d3d] inline p-1 rounded text-[#6AC045] laptop:text-sm'>{movie?.release_date?.slice(0,4) || "NA"}</p></Link>
               </div>
             )) : <p className='my-14'>Similar Movies Not Available</p> 
           }</>
