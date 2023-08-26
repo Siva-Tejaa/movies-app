@@ -50,7 +50,7 @@ const Search = () => {
               searchResults?.filter((result) => result?.media_type === mediatype).map((result)=>(
                 <Link to={mediatype === "movie" ? `/moviedetails/${result?.id}` : `/tvshowdetails/${result?.id}`}><div className='flex items-start gap-4 my-4 border-[#3e3e3e] border-[0.5px] p-2 laptop:gap-8' key={result?.id}>
                   <div className='w-[130px] laptop:w-[12%]'>
-                    <img src={result?.poster_path ? LONG_IMAGE_URL + result?.poster_path : POSTER_NOT_AVAILABLE} alt={result?.original_title} loading="lazy" className='bg-[#252525]' />
+                    <img src={result?.poster_path ? LONG_IMAGE_URL + result?.poster_path : POSTER_NOT_AVAILABLE} alt={result?.original_title} loading="lazy" className='bg-[#252525] rounded' />
                   </div>
                   <div className='flex gap-1 flex-col w-[80%]'>
                     <p className='text-base font-[700] text-[#fafafa] mb-[2px] laptop:text-lg desktop:text-lg'>{result?.title ? result?.title : result?.name && result?.name}</p>
