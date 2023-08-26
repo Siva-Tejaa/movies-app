@@ -3,7 +3,7 @@ import React from 'react'
 const About = () => {
   {document.title="About - iBOMMA"}
   return (
-    <div className='bg-[#1D1D1D] text-white'>
+    <div className='bg-[#1D1D1D] text-white h-[100vh]'>
       <div className='mx-5 pb-12 laptop:mx-14 pb-16 desktop:mx-16 pb-[108px]'>
         <h1 className='pt-12 pb-6 text-3xl'>About</h1>
         <p className='text-[#919191] text-sm my-5'>iBomma is an exclusive Telugu Movies online video streaming and download platform.</p>

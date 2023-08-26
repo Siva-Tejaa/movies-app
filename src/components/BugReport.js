@@ -3,7 +3,7 @@ import React from 'react'
 const BugReport = () => {
   {document.title="BugReport - iBOMMA"}
   return (
-    <div className='bg-[#1D1D1D] text-white'>
+    <div className='bg-[#1D1D1D] text-white h-[100vh]'>
       <div className='mx-5 pb-12 laptop:mx-14 pb-16 desktop:mx-16 pb-[144px]'>
         <h1 className='pt-12 pb-6 text-3xl'>Bug Report</h1>
         <div>

@@ -228,10 +228,10 @@ const TvShowDetails = () => {
           <>{
             similartvshows.length>0 ?
             similartvshows.slice(0,6).map((tvshow) => (
-              <div className='p-3 w-[31.3%] laptop:w-[15%] desktop:w-[15%]' key={tvshow?.id} title={tvshow?.title}>
-                <Link to={`/tvshowdetails/${tvshow?.id}`}><img src={tvshow?.poster_path ? LONG_IMAGE_URL + tvshow?.poster_path : POSTER_NOT_AVAILABLE} width="230" height="345" alt={tvshow?.original_title} loading="lazy" className='bg-[#252525]'/>
-                <p className='font-medium block whitespace-nowrap text-ellipsis overflow-hidden'>{tvshow?.name}</p>
-                <p className='text-sm font-light text-[#CCCCCC]'>{tvshow?.first_air_date.slice(0,4)}</p></Link>
+              <div className='p-1 mb-6 w-[31.3%] laptop:w-[15%] laptop:p-2 laptop:mb-2 desktop:w-[15%] desktop:p-3' key={tvshow?.id} title={tvshow?.title}>
+                <Link to={`/tvshowdetails/${tvshow?.id}`}><img src={tvshow?.poster_path ? LONG_IMAGE_URL + tvshow?.poster_path : POSTER_NOT_AVAILABLE} width="230" height="345" alt={tvshow?.original_title} loading="lazy" className='bg-[#252525] rounded'/>
+                <p className='font-medium text-sm block whitespace-nowrap text-ellipsis overflow-hidden laptop:text-base'>{tvshow?.name}</p>
+                <p className='text-xs font-medium bg-[#3d3d3d] inline p-1 rounded text-[#6AC045] laptop:text-sm'>{tvshow?.first_air_date.slice(0,4)}</p></Link>
               </div>
             )) : <p className='my-14'>Similar TV Shows Not Available</p> 
           }</>

@@ -28,7 +28,7 @@ const Upcoming = () => {
 
   return (
     <div className='mt-10'>
-      <div className='laptop:mx-14 desktop:mx-16'>
+      <div className='mx-4 laptop:mx-12 desktop:mx-16'>
       <p className='flex items-center text-lg'><MdUpcoming style={{ "color": 'var(--main-color)', "fontSize":"25px"}}/> &nbsp; Upcoming Movies</p>
       <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +53,7 @@ const Upcoming = () => {
         loading? 
           <>{
             Array(6).fill().map((skeleton, index) => (
-                <div className='p-3 w-[31.3%] laptop:w-[15%] desktop:w-[15%]' key={index} >
+                <div className='p-1 w-[31.3%] laptop:w-[15%] laptop:p-2 desktop:w-[15%] desktop:p-3' key={index} >
                   <BodySkeleton/>
                 </div>
             ))
@@ -61,10 +61,10 @@ const Upcoming = () => {
           
           <>{
             upcomingMovies.slice(0,6).map((movie) => (
-              <div className='p-3 w-[31.3%] laptop:w-[15%] desktop:w-[15%]' key={movie?.id} title={movie?.title}>
-                <Link to={`/moviedetails/${movie?.id}`}><img src={movie?.poster_path ? LONG_IMAGE_URL + movie?.poster_path : POSTER_NOT_AVAILABLE} width="230" height="345" alt={movie?.original_title} loading="lazy" className='bg-[#252525]'/>
-                <p className='font-medium block whitespace-nowrap text-ellipsis overflow-hidden'>{movie?.title}</p>
-                <p className='text-sm font-light text-[#CCCCCC]'>{movie?.release_date.slice(0,4)}</p></Link>
+              <div className='p-1 mb-6 w-[31.3%] laptop:w-[15%] laptop:p-2 laptop:mb-2 desktop:w-[15%] desktop:p-3' key={movie?.id} title={movie?.title}>
+                <Link to={`/moviedetails/${movie?.id}`}><img src={movie?.poster_path ? LONG_IMAGE_URL + movie?.poster_path : POSTER_NOT_AVAILABLE} width="230" height="345" alt={movie?.original_title} loading="lazy" className='bg-[#252525] rounded'/>
+                <p className='font-medium text-sm block whitespace-nowrap text-ellipsis overflow-hidden laptop:text-base'>{movie?.title}</p>
+                <p className='text-xs font-medium bg-[#3d3d3d] inline p-1 rounded text-[#6AC045] laptop:text-sm'>{movie?.release_date.slice(0,4)}</p></Link>
               </div>
             ))
           }</>
