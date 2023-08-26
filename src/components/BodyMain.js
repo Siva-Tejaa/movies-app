@@ -23,6 +23,7 @@ const BodyMain = () => {
   useEffect(()=> {
     setLoading(true);
     fetchTrendingMovies();
+
   }, [])
 
 
