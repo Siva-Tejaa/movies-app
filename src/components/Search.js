@@ -33,7 +33,7 @@ const Search = () => {
 
 
   return (
-    <div className='bg-[#1D1D1D] text-white h-[100vh]'>
+    <div className='bg-[#1D1D1D] text-white min-h-screen'>
       <div className='mx-3 py-6 laptop:mx-14 laptop:py-6 desktop:mx-16'>
         <div>
           <p className='bg-[var(--main-color)] p-2'>Search Results({searchResults.length>0 ? searchResults.length : "0"})</p>
