@@ -12,3 +12,15 @@
 .image_placeholder{
   background-image: url('./images//iBommaMovieContent.jpg');
 }
+.notfound{
+  animation: animName 3s linear infinite;
+}
+
+@keyframes animName {
+  0%{
+     transform: rotate(0deg);
+    }
+ 100%{
+     transform: rotate(360deg);
+    }
+ }
