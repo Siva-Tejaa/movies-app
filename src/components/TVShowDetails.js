@@ -9,7 +9,7 @@ import { IoMdGlobe } from "react-icons/io";
 import { SiSimilarweb } from "react-icons/si";
 import BodySkeleton from './LoadingSkeleton/BodySkeleton';
 import { Link } from 'react-router-dom';
-import { PosterNotAvailable, TmdbLogo, ActorProfile } from './utils/Api';
+import { PosterNotAvailable, TmdbLogo, ActorProfile, iBommaMovieContent } from './utils/Api';
 
 const TvShowDetails = () => {
 
@@ -22,6 +22,11 @@ const TvShowDetails = () => {
   const[tvshowvideos, setTvShowvideos] = useState([]);
   const[tvshowcredits, setTvShowcredits] = useState([]);
   const[similartvshows, setSimilarTvShows] = useState([]);
+  const[imageloading, setImageLoading] = useState(true);
+
+  const handleImageLoad = () => {
+    setImageLoading(false);
+  };
 
   const getTvShowDetails = async () => {
     await fetch(TV_DETAILS + tvshowid + "?api_key=" + API_KEY)
@@ -85,7 +90,16 @@ const TvShowDetails = () => {
     <div className={nav || search ? 'bg-[#1D1D1D] text-white pt-10 laptop:pt-0' : 'bg-[#1D1D1D] text-white' }>
       <div className='flex flex-nowrap justify-start gap-4 bg-cover bg-no-repeat bg-[#2b2b2b] bg-blend-overlay laptop:gap-8' style={{backgroundImage: `url(${LONG_IMAGE_URL}${tvshowdetails?.backdrop_path})`}}>
           <div className='ml-3 py-10 laptop:ml-14 laptop:py-14 desktop:ml-16 desktop:py-16'>
-            <img src={tvshowdetails?.poster_path ? LONG_IMAGE_URL + tvshowdetails?.poster_path : PosterNotAvailable} alt={tvshowdetails?.original_name} loading="lazy" className='bg-[#252525] rounded-md shadow-lg w-[165px] h-[240px] laptop:w-[235px] laptop:h-[360px]' /> 
+            {
+              imageloading ? <img src={iBommaMovieContent} alt={tvshowdetails?.original_name} loading="lazy" className='bg-[#252525] rounded-md shadow-lg w-[165px] h-[240px] laptop:w-[235px] laptop:h-[360px]'/> :
+              <img src={tvshowdetails?.poster_path ? LONG_IMAGE_URL + tvshowdetails?.poster_path : PosterNotAvailable} alt={tvshowdetails?.original_name} loading="lazy" className='bg-[#252525] rounded-md shadow-lg w-[165px] h-[240px] laptop:w-[235px] laptop:h-[360px]' /> 
+              // <img src={movie?.poster_path ? LONG_IMAGE_URL + movie?.poster_path : PosterNotAvailable} width="230" height="345" alt={movie?.original_title} loading="lazy" className='bg-[#252525] rounded'/>
+            }
+            {
+              imageloading && <img src={tvshowdetails?.poster_path ? LONG_IMAGE_URL + tvshowdetails?.poster_path : PosterNotAvailable} alt={tvshowdetails?.original_name} loading="lazy" onLoad={handleImageLoad} style={{"display": 'none'}} className='bg-[#252525] rounded-md shadow-lg w-[165px] h-[240px] laptop:w-[235px] laptop:h-[360px]' /> 
+              // imageloading && <img src={movie?.poster_path ? LONG_IMAGE_URL + movie?.poster_path : PosterNotAvailable} width="230" height="345" alt={movie?.original_title} loading="lazy" onLoad={handleImageLoad} style={{"display": 'none'}} className='bg-[#252525] rounded'/>
+            }
+            {/* <img src={tvshowdetails?.poster_path ? LONG_IMAGE_URL + tvshowdetails?.poster_path : PosterNotAvailable} alt={tvshowdetails?.original_name} loading="lazy" className='bg-[#252525] rounded-md shadow-lg w-[165px] h-[240px] laptop:w-[235px] laptop:h-[360px]' />  */}
           </div>
           <div className='py-11 overflow-hidden whitespace-nowrap text-ellipsis laptop:py-14 desktop:py-16'>
           <h1 className='text-xl font-[700] text-[#fafafa] mb-[2px] laptop:text-2xl desktop:text-3xl'>{tvshowdetails?.name}</h1>

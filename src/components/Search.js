@@ -20,6 +20,7 @@ const Search = () => {
      .then((res) => res.json())
      .then((json) => {
       setSearchResults(json?.results);
+      console.log(searchResults);
      })
      .catch((err) => console.log(err));
   };
